@@ -115,7 +115,7 @@
                         <i class="fa-regular fa-envelope"></i>
                         <div>
                             <h3>Email Address</h3>
-                            <p>wakavutimental@gmail.com</p>
+                            <p>dicksonmutugi015389@gmail.com</p>
                         </div>
                     </div>
 
@@ -138,39 +138,38 @@
                 </div>
             </div>
 
-            <div class="contact-form-card">
-                <form>
+            <form id="appointmentForm">
+    <div class="form-group">
+        <input type="text" name="fullName" placeholder="Full Name" autocomplete="name" required />
+    </div>
 
-                    <div class="form-group">
-                        <input type="text" placeholder="Full Name" required />
-                    </div>
+    <div class="form-group">
+        <input type="tel" name="phone" placeholder="Phone Number" inputmode="tel" pattern="^(07\d{8}|\+2547\d{8})$" title="Use 07XXXXXXXX or +2547XXXXXXXX" autocomplete="tel" required />
+    </div>
 
-                    <div class="form-group">
-                        <input type="tel" placeholder="Phone Number" required />
-                    </div>
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email Address" autocomplete="email" />
+    </div>
 
-                    <div class="form-group">
-                        <input type="email" placeholder="Email Address" />
-                    </div>
+    <div class="form-group">
+        <input type="text" name="service" placeholder="Service Needed" autocomplete="off" />
+    </div>
 
-                    <div class="form-group">
-                        <input type="text" placeholder="Service Needed" />
-                    </div>
+    <div class="form-group">
+        <input type="date" name="appointmentDate" />
+    </div>
 
-                    <div class="form-group">
-                        <input type="date" />
-                    </div>
+    <div class="form-group">
+        <textarea name="message" placeholder="Write your message here..."></textarea>
+    </div>
 
-                    <div class="form-group">
-                        <textarea placeholder="Write your message here..."></textarea>
-                    </div>
+    <button type="submit" class="btn btn-green">
+        <i class="fa-regular fa-calendar-check"></i>
+        Book Appointment
+    </button>
+</form>
 
-                    <button type="submit" class="btn btn-green">
-                        <i class="fa-regular fa-calendar-check"></i>
-                        Book Appointment
-                    </button>
 
-                </form>
             </div>
 
         </div>
@@ -246,7 +245,7 @@
             <h3>Contact Us</h3>
             <ul>
                 <li><i class="fa-solid fa-phone"></i> 0743 448 474</li>
-                <li><i class="fa-regular fa-envelope"></i> wakavutimental@gmail.com</li>
+                <li><i class="fa-regular fa-envelope"></i> dicksonmutugi015389@gmail.com</li>
                 <li><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</li>
             </ul>
         </div>
@@ -273,7 +272,74 @@
     <i class="fa-solid fa-arrow-up"></i>
 </a>
 
+
+<div class="wakavuti-chat" id="wakavutiChat">
+    <button class="wakavuti-chat-toggle" id="wakavutiChatToggle" aria-label="Open Wakavuti chat">
+        <i class="fa-regular fa-comments"></i>
+    </button>
+
+    <div class="wakavuti-chat-box">
+        <div class="wakavuti-chat-header">
+            <strong>Wakavuti Support</strong>
+            <button type="button" id="wakavutiChatClose">&times;</button>
+        </div>
+
+        <div class="wakavuti-chat-body">
+            <div class="chat-message bot">Hi, welcome to Wakavuti. How can we support you today?</div>
+        </div>
+
+        <form id="wakavutiChatForm" class="wakavuti-chat-form">
+            <input type="email" name="chatEmail" placeholder="Your email" autocomplete="email" />
+            <textarea name="chatMessage" placeholder="Type your message..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+
 <script src="js/main.js"></script>
+
+<script>
+const appointmentForm = document.getElementById("appointmentForm");
+
+if (appointmentForm) {
+    appointmentForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = {
+            fullName: appointmentForm.fullName.value,
+            phone: appointmentForm.phone.value,
+            email: appointmentForm.email.value,
+            service: appointmentForm.service.value,
+            appointmentDate: appointmentForm.appointmentDate.value,
+            message: appointmentForm.message.value
+        };
+
+        try {
+            const response = await fetch("http://localhost:5000/api/appointment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Appointment request sent successfully.");
+                appointmentForm.reset();
+            } else {
+                alert(result.message || "Failed to send appointment request.");
+            }
+
+        } catch (error) {
+            alert("Unable to connect to the server. Make sure backend is running.");
+            console.error(error);
+        }
+    });
+}
+</script>
 
 </body>
 </html>

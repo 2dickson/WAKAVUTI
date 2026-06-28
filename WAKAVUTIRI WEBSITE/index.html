@@ -21,7 +21,6 @@
     <!-- ================= HEADER / NAVBAR ================= -->
     <header class="site-header">
         <div class="container nav-wrapper">
-            
 
             <a href="index.html" class="brand">
                 <img src="images/logo.png" alt="Wakavuti Logo" />
@@ -32,7 +31,7 @@
                     <span>Wellness and Rehabilitation Limited</span>
                 </div>
             </a>
-
+          
             <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -56,6 +55,7 @@
                     <i class="fa-regular fa-calendar-check"></i>
                     Book Appointment
                 </a>
+                
             </div>
 
         </div>
@@ -501,10 +501,37 @@
 
     <!-- Floating Back To Top Button -->
 <a href="#home" class="back-to-top-btn" id="backToTop">
-    <i class="fa-solid fa-arrow-up"></i> 
+    <i class="fa-solid fa-arrow-up"></i>
 </a>
+
+
+<div class="wakavuti-chat" id="wakavutiChat">
+    <button class="wakavuti-chat-toggle" id="wakavutiChatToggle" aria-label="Open Wakavuti chat">
+        <i class="fa-regular fa-comments"></i>
+    </button>
+
+    <div class="wakavuti-chat-box">
+        <div class="wakavuti-chat-header">
+            <strong>Wakavuti Support</strong>
+            <button type="button" id="wakavutiChatClose">&times;</button>
+        </div>
+
+        <div class="wakavuti-chat-body">
+            <div class="chat-message bot">Hi, welcome to Wakavuti. How can we support you today?</div>
+        </div>
+
+        <form id="wakavutiChatForm" class="wakavuti-chat-form">
+            <input type="email" name="chatEmail" placeholder="Your email" autocomplete="email" />
+            <textarea name="chatMessage" placeholder="Type your message..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</div>
+
+
 
     <script src="js/main.js"></script>
 
+    
 </body>
 </html>
